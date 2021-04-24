@@ -5,11 +5,14 @@ import java.io.Serializable;
 import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 public class ItemPedido implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 
+	@JsonIgnore //usa-se quando existe uma classe que incorpora duas chaves estrangeiras
 	@EmbeddedId //id colocado em um tipo auxiliar
 	private ItemPedidoPK id = new ItemPedidoPK();
 	
@@ -30,7 +33,8 @@ public class ItemPedido implements Serializable {
 		this.preco = preco;
 	}
 
-	
+
+	@JsonIgnore
 	public Pedido getPedido() {
 		return id.getPedido();
 	}
